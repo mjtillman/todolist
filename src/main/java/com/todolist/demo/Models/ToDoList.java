@@ -1,16 +1,11 @@
 package com.todolist.demo.Models;
 
-import lombok.*;
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name="todolists")
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
 public class ToDoList {
 
   @Id @GeneratedValue
@@ -20,9 +15,32 @@ public class ToDoList {
   private String title;
 
   @Column
-  private List<String> tasks;
+  private ArrayList<String> tasks;
 
   @ManyToOne
   @JoinColumn(name = "owner_id")
   private User owner;
+
+  public ToDoList(long id, String title, List<String> tasks, User owner) {
+    this.id = id;
+    this.title = title;
+    this.tasks = tasks;
+    this.owner = owner;
+  }
+
+  public long getId() {
+    return id;
+  }
+
+  public String getTitle() {
+    return title;
+  }
+
+  public List<String> getTasks() {
+    return tasks;
+  }
+
+  public User getOwner() {
+    return owner;
+  }
 }

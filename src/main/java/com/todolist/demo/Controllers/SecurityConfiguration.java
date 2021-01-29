@@ -1,5 +1,6 @@
 package com.todolist.demo.Controllers;
 
+import com.todolist.demo.Services.UserDetailServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -10,10 +11,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-  private UserDetailsLoader usersLoader;
+  private final UserDetailServiceImpl userLoader;
 
-  public SecurityConfiguration(UserDetailsLoader usersLoader) {
-    this.usersLoader = usersLoader;
+  public SecurityConfiguration(UserDetailServiceImpl userLoader) {
+    this.userLoader = userLoader;
   }
 
   @Bean
@@ -24,7 +25,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
   @Override
   protected void configure(AuthenticationManagerBuilder auth) throws Exception {
     auth
-        .userDetailsService(usersLoader) // How to find users by their username
+        .UserDetailServiceImpl(userLoader) // How to find users by their username
         .passwordEncoder(passwordEncoder()) // How to encode and verify passwords
     ;
   }

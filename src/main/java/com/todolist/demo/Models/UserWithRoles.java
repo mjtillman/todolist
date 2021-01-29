@@ -18,6 +18,16 @@ public class UserWithRoles extends User implements UserDetails {
   }
 
   @Override
+  public String getPassword() {
+    return null;
+  }
+
+  @Override
+  public String getUsername() {
+    return null;
+  }
+
+  @Override
   public boolean isAccountNonExpired() {
     return true;
   }
